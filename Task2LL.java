@@ -22,19 +22,19 @@ public class Task2LL {
             int n = Integer.parseInt(rd.readLine());
             LinkedList<LinkedList<Boolean>> funcs = new LinkedList<>();
             boolean[] post = new boolean[]{true, true, true, true, true};
-            char[] buffer;
+            String buffer;
             int j, argsCount;
             for (int i = 0; i < n; i++) {
-                buffer = rd.readLine().toCharArray();
+                buffer = rd.readLine();
                 j = 0;
-                while (!Character.isSpaceChar(buffer[j])) {
+                while (!Character.isSpaceChar(buffer.charAt(j))) {
                     j++;
                 }
-                argsCount = Integer.parseInt(new String(buffer, 0, j));
+                argsCount = Integer.parseInt(buffer.substring(0, j));
                 funcs.add(new LinkedList<Boolean>());
                 j++;
-                for (int k = j; k < buffer.length; k++) {
-                    funcs.get(i).add(buffer[k] == '1');
+                for (int k = j; k < j + (1 << argsCount); k++) {
+                    funcs.get(i).add(buffer.charAt(k) == '1');
                 }
             }
             boolean isSelfDual;
@@ -87,8 +87,10 @@ public class Task2LL {
         }
         catch (IOException e) {
             System.err.println("Runtime exception: " + e.getMessage());
+            System.exit(1);
         } catch (IndexOutOfBoundsException e) {
             System.err.println("Index out of bounds exception: " + e.getMessage());
+            System.exit(2);
         }
     }
 }
